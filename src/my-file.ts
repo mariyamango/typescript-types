@@ -47,64 +47,48 @@ students.forEach(student => {
 });
 
 function averageGrade (s : Student) :number {
-    let sportGrades = s.grades.Sport;
-    let numericSportGrades : number[] = [];
-    for (let i = 0; i < sportGrades.length; i++){
-         if (sportGrades[i] === "A" || sportGrades[i] === 1) {
-            numericSportGrades.push(1);
-        } else if (sportGrades[i] === "B" || sportGrades[i] === 2) {
-            numericSportGrades.push(2);
-        } else if (sportGrades[i] === "C" || sportGrades[i] === 3) {
-            numericSportGrades.push(3);
-        } else if (sportGrades[i] === "D" || sportGrades[i] === 4) {
-            numericSportGrades.push(4);
-        } else if (sportGrades[i] === "E" || sportGrades[i] === 5) {
-            numericSportGrades.push(5);
-        } else if (sportGrades[i] === "F" || sportGrades[i] === 6) {
-            numericSportGrades.push(6);
-        };
-    }
-    let lengthSport = numericSportGrades.length;
-    let averageSport = (numericSportGrades.reduce((a,b) => a + b,0)) / lengthSport;
-    let artGrades = s.grades.Art;
-    let numericArtGrades : number[] = [];
-    for (let i = 0; i < artGrades.length; i++){
-        if (artGrades[i] === "A" || artGrades[i] === 1) {
-            numericArtGrades.push(1);
-        } else if (artGrades[i] === "B" || artGrades[i] === 2) {
-            numericArtGrades.push(2);
-        } else if (artGrades[i] === "C" || artGrades[i] === 3) {
-            numericArtGrades.push(3);
-        } else if (artGrades[i] === "D" || artGrades[i] === 4) {
-            numericArtGrades.push(4);
-        } else if (artGrades[i] === "E" || artGrades[i] === 5) {
-            numericArtGrades.push(5);
-        } else if (artGrades[i] === "F" || artGrades[i] === 6) {
-            numericArtGrades.push(6);
-        };
-    }
-    let lengthArt = numericArtGrades.length;
-    let averageArt = (numericArtGrades.reduce((a,b) => a + b,0)) / lengthArt;
-    let mathGrades = s.grades.Mathematics;
-    let numericMathGrades : number[] = [];
-    for (let i = 0; i < mathGrades.length; i++){
-        if (mathGrades[i] === "A" || mathGrades[i] === 1) {
-            numericMathGrades.push(1);
-        } else if (mathGrades[i] === "B" || mathGrades[i] === 2) {
-            numericMathGrades.push(2);
-        } else if (mathGrades[i] === "C" || mathGrades[i] === 3) {
-            numericMathGrades.push(3);
-        } else if (mathGrades[i] === "D" || mathGrades[i] === 4) {
-            numericMathGrades.push(4);
-        } else if (mathGrades[i] === "E" || mathGrades[i] === 5) {
-            numericMathGrades.push(5);
-        } else if (mathGrades[i] === "F" || mathGrades[i] === 6) {
-            numericMathGrades.push(6);
-        };
-    }
-    let lengthMath = numericMathGrades.length;
-    let averageMath = (numericMathGrades.reduce((a,b) => a + b,0)) / lengthMath;
+    let numericSportGrades : number[] = toNumericArray(s.grades.Sport);
+    let averageSport = (numericSportGrades.reduce((a,b) => a + b,0)) / numericSportGrades.length;
+    let numericArtGrades : number[] = toNumericArray(s.grades.Art);
+    let averageArt = (numericArtGrades.reduce((a,b) => a + b,0)) / numericArtGrades.length;
+    let numericMathGrades : number[] = toNumericArray(s.grades.Mathematics);
+    let averageMath = (numericMathGrades.reduce((a,b) => a + b,0)) / numericMathGrades.length;
     return (averageSport + averageMath + averageArt)/3;
+}
+
+function toNumericArray (array : (number | String | undefined) []) : number[] {
+    let numericArray : number [] = [];
+    for (let i = 0; i < array.length; i++){
+        switch (array[i]) {
+            case 'A':
+            case 1:
+                numericArray.push(1);
+                break;
+            case 'B':
+            case 2:
+                numericArray.push(2);
+                break;
+            case 'C':
+            case 3:
+                numericArray.push(3);
+                break;
+            case 'D':
+            case 4:
+                numericArray.push(4);
+                break;
+            case 'E':
+            case 5:
+                numericArray.push(5);
+                break;
+            case 'F':
+            case 6:
+                numericArray.push(6);
+                break;
+            default:
+                break;
+        }
+    }
+    return numericArray;
 }
 
 console.log('The average grade for John is ' + averageGrade(John).toFixed(2));
