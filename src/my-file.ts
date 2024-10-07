@@ -1,7 +1,3 @@
-//Each student should have a first name, last name, age, and a property "grades" that contains a list of grades.
-//In this first step, a grade should be an integer from 1 to 6. Choose suitable English names for the attributes.
-//Then create a student and output it in the console.
-
 interface Student {
     firstName: string,
     lastName: string,
@@ -18,7 +14,7 @@ let John: Student = {
     firstName: 'John',
     lastName: 'Johnson',
     age: 20,
-    grades: {"Sport": [1, 5, 6, undefined, 8], "Art" : [2, undefined, 4, 3, "B" ], "Mathematics" : [2, undefined, "A", 3, 6, undefined]}
+    grades: {"Sport": [1, 5, undefined, 6, 6], "Art" : [2, 4, 3, "B" ], "Mathematics" : [2, "A", 3, 6, undefined]}
 };
 
 let Bob: Student = {
@@ -40,8 +36,8 @@ function output(s: Student) {
     console.log((`Math: ${mathGrades}`));
 }
 
-output(John);
-output(Bob);
+// output(John);
+// output(Bob);
 
 let students: Student[] = [John, Bob];
 
@@ -50,23 +46,66 @@ students.forEach(student => {
     console.log()
 });
 
+function averageGrade (s : Student) :number {
+    let sportGrades = s.grades.Sport;
+    let numericSportGrades : number[] = [];
+    for (let i = 0; i < sportGrades.length; i++){
+         if (sportGrades[i] === "A" || sportGrades[i] === 1) {
+            numericSportGrades.push(1);
+        } else if (sportGrades[i] === "B" || sportGrades[i] === 2) {
+            numericSportGrades.push(2);
+        } else if (sportGrades[i] === "C" || sportGrades[i] === 3) {
+            numericSportGrades.push(3);
+        } else if (sportGrades[i] === "D" || sportGrades[i] === 4) {
+            numericSportGrades.push(4);
+        } else if (sportGrades[i] === "E" || sportGrades[i] === 5) {
+            numericSportGrades.push(5);
+        } else if (sportGrades[i] === "F" || sportGrades[i] === 6) {
+            numericSportGrades.push(6);
+        };
+    }
+    let lengthSport = numericSportGrades.length;
+    let averageSport = (numericSportGrades.reduce((a,b) => a + b,0)) / lengthSport;
+    let artGrades = s.grades.Art;
+    let numericArtGrades : number[] = [];
+    for (let i = 0; i < artGrades.length; i++){
+        if (artGrades[i] === "A" || artGrades[i] === 1) {
+            numericArtGrades.push(1);
+        } else if (artGrades[i] === "B" || artGrades[i] === 2) {
+            numericArtGrades.push(2);
+        } else if (artGrades[i] === "C" || artGrades[i] === 3) {
+            numericArtGrades.push(3);
+        } else if (artGrades[i] === "D" || artGrades[i] === 4) {
+            numericArtGrades.push(4);
+        } else if (artGrades[i] === "E" || artGrades[i] === 5) {
+            numericArtGrades.push(5);
+        } else if (artGrades[i] === "F" || artGrades[i] === 6) {
+            numericArtGrades.push(6);
+        };
+    }
+    let lengthArt = numericArtGrades.length;
+    let averageArt = (numericArtGrades.reduce((a,b) => a + b,0)) / lengthArt;
+    let mathGrades = s.grades.Mathematics;
+    let numericMathGrades : number[] = [];
+    for (let i = 0; i < mathGrades.length; i++){
+        if (mathGrades[i] === "A" || mathGrades[i] === 1) {
+            numericMathGrades.push(1);
+        } else if (mathGrades[i] === "B" || mathGrades[i] === 2) {
+            numericMathGrades.push(2);
+        } else if (mathGrades[i] === "C" || mathGrades[i] === 3) {
+            numericMathGrades.push(3);
+        } else if (mathGrades[i] === "D" || mathGrades[i] === 4) {
+            numericMathGrades.push(4);
+        } else if (mathGrades[i] === "E" || mathGrades[i] === 5) {
+            numericMathGrades.push(5);
+        } else if (mathGrades[i] === "F" || mathGrades[i] === 6) {
+            numericMathGrades.push(6);
+        };
+    }
+    let lengthMath = numericMathGrades.length;
+    let averageMath = (numericMathGrades.reduce((a,b) => a + b,0)) / lengthMath;
+    return (averageSport + averageMath + averageArt)/3;
+}
 
-// const avgGrade = (s: Student) => {
-//     let sum: number =0;
-//     let avgSportGrade : number = 0;
-//     let sportGrade = s.grades.Sport.map(grade => {
-//         grade ===( 1 | 2 | 3 | 4 | 5 | 6) ? sum += grade :
-//             grade === "A" ? sum += 1 :
-//                 grade ==="B" ? sum += 2 :
-//                     grade === "C" ? sum += 3 :
-//                         grade === "D" ? sum += 4 :
-//                             grade === "E" ? sum += 5 :
-//                                 grade === "F" ? sum += 6 :
-//                                     sum;
-//         avgSportGrade = sum/sportGrade.length});
-// }
-
-
-
-
-
+console.log('The average grade for John is ' + averageGrade(John).toFixed(2));
+console.log('The average grade for Bob is ' + averageGrade(Bob).toFixed(2));
